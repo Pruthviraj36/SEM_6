@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container text-center py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <!-- Game Header -->
+                <div class="card shadow-lg border-0 mb-4 game-header">
+                    <div class="card-body p-4">
+                        <h1 class="display-5 fw-bold text-primary mb-3">
+                            snake game
+                        </h1>
+                        <div class="score h2 mb-0 text-white">
+                            Score: <span id="score" class="text-warning fw-bold">0</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Game canvas -->
+                <div class="card shadow-lg border-0 mb-4 overflow-hidden">
+                    <div class="card-body p-0">
+                        <canvas id="gameCanvas" width="400" height="400" class="w-100"></canvas>
+                    </div>
+                </div>
+                <!-- Game over Alert -->
+                <div>
+                    <div id="gameOver" class="alert alert-danger shadow-lg display-6 fw-bold d-none mb-0" role="alert">
+                        <i class="bi bi-x-circle-fill me-2"></i>
+                        Game Over! Press <kbd>SPACE</kbd> to restart
+                    </div>
+                    <!-- Controls -->
+                    <div class="card shadow border-0 mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted mb-3">Controls</h5>
+                            <div class="row text-center g-3">
+                                <div class="col-3">
+                                    <kbd>↑</kbd><br><small>Up</small>
+                                </div>
+                                <div class="col-3">
+                                    <kbd>← ↓ →</kbd><br><small>Directions</small>
+                                </div>
+                                <div class="col-3">
+                                    <kbd>SPACE</kbd><br><small>Restart</small>
+                                </div>
+                                <div class="col-3">
+                                    <button id="restartBtn" class="btn btn-success btn-sm px-3">
+                                        <i class="bi bi-arrow-repeat"></i>
+                                        Restart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="snake.js"></script>
+</body>
+
+</html>

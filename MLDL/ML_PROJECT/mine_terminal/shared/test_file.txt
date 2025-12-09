@@ -1,0 +1,2 @@
+This is a test file for the Minecraft Terminal File Sharing Interface.
+If you are reading this, the file transfer worked!

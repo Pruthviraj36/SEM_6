@@ -1,0 +1,12 @@
+{
+  "repoUrl": "https://github.com/Pruthviraj36/SEM_6.git",
+  "defaultBranch": "main",
+  "autoPush": false,
+  "autoFetch": false,
+  "commitStyle": "conventional",
+  "customPrefix": null,
+  "aiEnabled": false,
+  "aiApiKey": null,
+  "aiModel": "gemini-pro",
+  "setupDate": "2025-12-09T11:59:18.650Z"
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Event Printer</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: monospace;
+            background: #f8f9fa;
+        }
+        #eventLog {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.9);
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .crosshair {
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body class="crosshair">
+    <div id="eventLog">
+        Move mouse, click, or scroll to see events...
+    </div>
+
+    <script>
+        const eventLog = document.getElementById('eventLog');
+        
+        // Track all common mouse events
+        ['click', 'dblclick', 'mousedown', 'mouseup', 'mousemove', 'mouseover', 'mouseout', 'mouseenter', 'mouseleave', 'contextmenu'].forEach(eventType => {
+            document.addEventListener(eventType, (e) => {
+                const time = new Date().toLocaleTimeString();
+                const coords = `X:${e.clientX.toFixed(0)} Y:${e.clientY.toFixed(0)}`;
+                const button = e.button === 0 ? 'Left' : e.button === 2 ? 'Right' : e.button === 1 ? 'Middle' : 'Other';
+                const buttons = `Buttons:${e.buttons}`;
+                const target = e.target.id || e.target.tagName || 'Unknown';
+                
+                eventLog.textContent = `${time} | ${eventType.toUpperCase()} | ${coords} | ${button} | ${buttons} | Target: ${target}`;
+                console.log(eventLog.textContent);
+            });
+        });
+
+        // Bonus: Wheel events
+        document.addEventListener('wheel', (e) => {
+            const time = new Date().toLocaleTimeString();
+            eventLog.textContent = `${time} | WHEEL | DeltaY:${e.deltaY.toFixed(0)} | Target: ${e.target.tagName}`;
+        });
+    </script>
+</body>
+</html>
+    

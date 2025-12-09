@@ -1,0 +1,30 @@
+#main_container {
+    layout: vertical;
+    height: 100%;
+}
+
+#world_view {
+    height: 80%;
+    border: solid green;
+    background: #1e1e1e;
+}
+
+#console_view {
+    height: 20%;
+    border: solid white;
+    dock: bottom;
+}
+
+ConsoleWidget {
+    layout: vertical;
+}
+
+#command_input {
+    dock: bottom;
+}
+
+#log_output {
+    height: 1fr;
+    overflow-y: scroll;
+    color: #aaaaaa;
+}

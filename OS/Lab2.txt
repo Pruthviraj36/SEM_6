@@ -1,0 +1,196 @@
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ who
+anonymous pts/1        2025-12-05 12:13
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ whoami
+anonymous
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ uname
+Linux
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ ls
+Desktop    go         nltk_data  Public
+Documents  LockKnife  Personal   Templates
+Downloads  Music      Pictures   Videos
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ mkdir demo
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ cd demo
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ echo "hello from demo" >> demo.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ cp demo.txt demo1.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ ls
+demo1.txt  demo.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ mv demo1.txt ../Downloads/
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ cd ..
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ cd Do
+-bash: cd: Do: No such file or directory
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ cd Downloads/
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/Downloads]
+└─$ ls
+demo1.txt  SpiderFoot.xlsx
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/Downloads]
+└─$ rm demo1.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/Downloads]
+└─$ cd ..
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ ls
+demo       Downloads  Music      Pictures   Videos
+Desktop    go         nltk_data  Public
+Documents  LockKnife  Personal   Templates
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ rm -rf LockKnife
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ ls
+demo     Documents  go     nltk_data  Pictures  Templates
+Desktop  Downloads  Music  Personal   Public    Videos
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ cd demo
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ cut -c1-10 demo.txt
+hello from
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ cp demo.txt demo1.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ paste demo.txt demo1.txt > comb.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ more demo.txt
+hello from demo
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$
+
+==================================================PART-B===============================================
+
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ cd ..
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ ls
+demo     Documents  go     nltk_data  Pictures  Templates
+Desktop  Downloads  Music  Personal   Public    Videos
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ mkdir backup_demo
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ mkdir diet
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ cp demo/demo.txt backup_demo/
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ cd backup_demo/
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/backup_demo]
+└─$ ls
+demo.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/backup_demo]
+└─$ cd ..
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ mv demo/demo.txt diet/
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ cd diet/
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/diet]
+└─$ ls
+demo.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/diet]
+└─$ cd ..
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ ls
+comb.txt  demo.txt  extra.txt  result.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ cut -d' ' -f1,2 demo.txt | paste - extra.txt > result.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ cat result.txt
+John 85 A-grade
+Alice 92        B-grade
+
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ rm result.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ cut -d' ' -f1,2 demo.txt | paste - extra.txt > result.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ rm result.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ cut -d' ' -f1,2 demo.txt | paste - extra.txt > result.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$ cat result.txt
+John 85 A-grade
+Alice 92        B-grade
+
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/demo]
+└─$
+
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ ls
+demo     Documents  go     nltk_data  Pictures  Templates
+Desktop  Downloads  Music  Personal   Public    Videos
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ mkdir backup
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ ls
+backup   Documents  Music      Pictures   Videos
+demo     Downloads  nltk_data  Public
+Desktop  go         Personal   Templates
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ cp demo/*.txt backup/
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~]
+└─$ cd backup/
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/backup]
+└─$ ls
+comb.txt  demo.txt  extra.txt  result.txt
+
+┌──(anonymous㉿PRUTHVIRAJ)-[~/backup]
+└─$

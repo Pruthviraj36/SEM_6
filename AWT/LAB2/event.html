@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap BG Color Changer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <button id="colorBtn" class="btn btn-light btn-lg px-5 py-3 fs-4 shadow-lg">
+            Change Background
+        </button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {  // ✅ Wait for DOM
+            const btn = document.getElementById('colorBtn');
+            const body = document.body;
+            const colors = ['bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-light', 'bg-dark'];
+            let currentIndex = 0;  // ✅ Outside listener
+
+            btn.addEventListener('click', () => {  // ✅ Direct button listener
+                colors.forEach(color => body.classList.remove(color));
+                body.classList.add(colors[currentIndex]);
+                currentIndex = (currentIndex + 1) % colors.length;
+            });
+        });
+    </script>
+</body>
+</html>

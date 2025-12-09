@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="myForm">
+        <input type="text" name="name" placeholder="Enter name" />
+        <input type="checkbox" name="subscribe" /> Subscribe
+        <select name="choices">
+            <option value="A">Choice A</option>
+            <option value="B">Choice B</option>
+        </select>
+        <br />
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+    <script>
+        window.onload = function () {
+            var form = document.getElementById('myForm')
+
+            var events = ['submit', 'reset', 'input', 'change', 'focus', 'blur']
+
+            events.forEach((e) => {
+                form.addEventListener(e, (ev) => {
+                    if (e == 'submit') ev.preventDefault()
+                    console.log(e, ev.target.name, ev.target.value)
+                }, true)
+            })
+        }
+    </script>
+</body>
+
+</html>

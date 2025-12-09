@@ -1,0 +1,2 @@
+numeric_features,categorical_features,train_shape,test_shape
+"['age_years', 'height', 'weight', 'bmi', 'ap_lo', 'ap_hi']","['gender', 'cholesterol', 'gluc', 'smoke', 'alco', 'active']","(56000, 14)","(14000, 14)"
