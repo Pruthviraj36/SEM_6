@@ -1,0 +1,152 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model changelog {
+  LogID       Int                 @id @default(autoincrement())
+  TableName   String              @db.VarChar(100)
+  RecordID    Int
+  Operation   changelog_Operation
+  OldData     Json?
+  NewData     Json?
+  PerformedAt DateTime            @default(now()) @db.DateTime(0)
+}
+
+model projectgroup {
+  ProjectGroupID                            Int                  @id @default(autoincrement())
+  ProjectGroupName                          String               @db.VarChar(150)
+  ProjectTypeID                             Int?
+  GuideStaffName                            String?              @db.VarChar(150)
+  ProjectTitle                              String               @db.VarChar(255)
+  ProjectArea                               String?              @db.VarChar(150)
+  ProjectDescription                        String?              @db.Text
+  AverageCPI                                Decimal?             @db.Decimal(4, 2)
+  ConvenerStaffID                           Int?
+  ExpertStaffID                             Int?
+  Description                               String?              @db.Text
+  Created                                   DateTime             @default(now()) @db.DateTime(0)
+  Modified                                  DateTime             @default(now()) @db.DateTime(0)
+  staff_projectgroup_ConvenerStaffIDTostaff staff?               @relation("projectgroup_ConvenerStaffIDTostaff", fields: [ConvenerStaffID], references: [StaffID], onDelete: NoAction, onUpdate: NoAction, map: "fk_pg_convener")
+  staff_projectgroup_ExpertStaffIDTostaff   staff?               @relation("projectgroup_ExpertStaffIDTostaff", fields: [ExpertStaffID], references: [StaffID], onDelete: NoAction, onUpdate: NoAction, map: "fk_pg_expert")
+  projecttype                               projecttype?         @relation(fields: [ProjectTypeID], references: [ProjectTypeID], onDelete: NoAction, onUpdate: NoAction, map: "fk_pg_projecttype")
+  projectgroupmember                        projectgroupmember[]
+  projectmeeting                            projectmeeting[]
+
+  @@index([ConvenerStaffID], map: "fk_pg_convener")
+  @@index([ExpertStaffID], map: "fk_pg_expert")
+  @@index([ProjectTypeID], map: "fk_pg_projecttype")
+}
+
+model projectgroupmember {
+  ProjectGroupMemberID Int          @id @default(autoincrement())
+  ProjectGroupID       Int
+  StudentID            Int
+  IsGroupLeader        Boolean      @default(false)
+  StudentCGPA          Decimal?     @db.Decimal(4, 2)
+  Description          String?      @db.Text
+  Created              DateTime     @default(now()) @db.DateTime(0)
+  Modified             DateTime     @default(now()) @db.DateTime(0)
+  projectgroup         projectgroup @relation(fields: [ProjectGroupID], references: [ProjectGroupID], onDelete: NoAction, onUpdate: NoAction, map: "fk_pgm_group")
+  student              student      @relation(fields: [StudentID], references: [StudentID], onDelete: NoAction, onUpdate: NoAction, map: "fk_pgm_student")
+
+  @@index([ProjectGroupID], map: "fk_pgm_group")
+  @@index([StudentID], map: "fk_pgm_student")
+}
+
+model projectmeeting {
+  ProjectMeetingID         Int                        @id @default(autoincrement())
+  ProjectGroupID           Int
+  GuideStaffID             Int
+  MeetingDateTime          DateTime                   @db.DateTime(0)
+  MeetingPurpose           String                     @db.VarChar(255)
+  MeetingLocation          String                     @db.VarChar(255)
+  MeetingNotes             String?                    @db.Text
+  MeetingStatus            String?                    @db.VarChar(50)
+  MeetingStatusDescription String?                    @db.Text
+  MeetingStatusDatetime    DateTime?                  @db.DateTime(0)
+  Description              String?                    @db.Text
+  Created                  DateTime                   @default(now()) @db.DateTime(0)
+  Modified                 DateTime                   @default(now()) @db.DateTime(0)
+  projectgroup             projectgroup               @relation(fields: [ProjectGroupID], references: [ProjectGroupID], onDelete: NoAction, onUpdate: NoAction, map: "fk_pm_group")
+  staff                    staff                      @relation(fields: [GuideStaffID], references: [StaffID], onDelete: NoAction, onUpdate: NoAction, map: "fk_pm_guide")
+  projectmeetingattendance projectmeetingattendance[]
+
+  @@index([ProjectGroupID], map: "fk_pm_group")
+  @@index([GuideStaffID], map: "fk_pm_guide")
+}
+
+model projectmeetingattendance {
+  ProjectMeetingAttendanceID Int            @id @default(autoincrement())
+  ProjectMeetingID           Int
+  StudentID                  Int
+  IsPresent                  Boolean        @default(true)
+  AttendanceRemarks          String?        @db.VarChar(255)
+  Description                String?        @db.Text
+  Created                    DateTime       @default(now()) @db.DateTime(0)
+  Modified                   DateTime       @default(now()) @db.DateTime(0)
+  projectmeeting             projectmeeting @relation(fields: [ProjectMeetingID], references: [ProjectMeetingID], onDelete: NoAction, onUpdate: NoAction, map: "fk_pma_meeting")
+  student                    student        @relation(fields: [StudentID], references: [StudentID], onDelete: NoAction, onUpdate: NoAction, map: "fk_pma_student")
+
+  @@index([ProjectMeetingID], map: "fk_pma_meeting")
+  @@index([StudentID], map: "fk_pma_student")
+}
+
+model projecttype {
+  ProjectTypeID   Int            @id @default(autoincrement())
+  ProjectTypeName String         @db.VarChar(100)
+  Description     String?        @db.Text
+  Created         DateTime       @default(now()) @db.DateTime(0)
+  Modified        DateTime       @default(now()) @db.DateTime(0)
+  projectgroup    projectgroup[]
+}
+
+model staff {
+  StaffID                                          Int              @id @default(autoincrement())
+  StaffName                                        String           @db.VarChar(150)
+  Phone                                            String?          @db.VarChar(20)
+  Email                                            String?          @unique(map: "uq_staff_email") @db.VarChar(150)
+  Role                                             String?          @db.VarChar(50)
+  Password                                         Bytes            @db.VarBinary(255)
+  Description                                      String?          @db.Text
+  Created                                          DateTime         @default(now()) @db.DateTime(0)
+  Modified                                         DateTime         @default(now()) @db.DateTime(0)
+  projectgroup_projectgroup_ConvenerStaffIDTostaff projectgroup[]   @relation("projectgroup_ConvenerStaffIDTostaff")
+  projectgroup_projectgroup_ExpertStaffIDTostaff   projectgroup[]   @relation("projectgroup_ExpertStaffIDTostaff")
+  projectmeeting                                   projectmeeting[]
+  staffloginlog                                    staffloginlog[]
+}
+
+model staffloginlog {
+  LoginLogID Int      @id @default(autoincrement())
+  StaffID    Int
+  LoginTime  DateTime @default(now()) @db.DateTime(0)
+  IPAddress  String?  @db.VarChar(45)
+  UserAgent  String?  @db.VarChar(255)
+  Success    Boolean
+  staff      staff    @relation(fields: [StaffID], references: [StaffID], onDelete: NoAction, onUpdate: NoAction, map: "fk_login_staff")
+
+  @@index([StaffID], map: "fk_login_staff")
+}
+
+model student {
+  StudentID                Int                        @id @default(autoincrement())
+  StudentName              String                     @db.VarChar(150)
+  Phone                    String?                    @db.VarChar(20)
+  Email                    String?                    @db.VarChar(150)
+  Description              String?                    @db.Text
+  Created                  DateTime                   @default(now()) @db.DateTime(0)
+  Modified                 DateTime                   @default(now()) @db.DateTime(0)
+  projectgroupmember       projectgroupmember[]
+  projectmeetingattendance projectmeetingattendance[]
+}
+
+enum changelog_Operation {
+  INSERT
+  UPDATE
+  DELETE
+}
